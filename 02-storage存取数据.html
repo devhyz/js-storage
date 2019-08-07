@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text"  id="target" />
+		<input type="checkbox" id="stor" />使用localstorage保存<br \>
+		<input type="button" id="read" value="读取数据"/>
+		<input type="button" id="write" value="存储数据"/>
+		<input type="button" id="cle" value="清除storage"/><br \>
+		
+		<div id="show"></div>
+		
+		<script type="text/javascript">
+//			1添加
+			var write = document.getElementById("write");
+			var target = document.getElementById("target");
+				write.onclick = function (){
+			//	是否选中checked,要放在回调函数里面，这样不会先执行一次，获取不到选择后的值
+			var selet = document.getElementById("stor").checked;
+			var storag = selet?localStorage:sessionStorage;
+				storag[target.value+""] = target.value;
+			}
+				
+//			2读取	
+			var read = document.getElementById("read");
+			var show = document.getElementById("show");
+				read.onclick = function (){
+			var selet = document.getElementById("stor").checked;
+			var storag = selet?localStorage:sessionStorage;
+			
+			for (var i= 0;i<storag.length;i++) {
+				var key = storag.key(i);
+				show.innerHTML += storag.getItem(key);
+			}
+				 
+			}
+			
+//			3清除
+			var cle = document.getElementById("cle");
+					cle.onclick = function(){
+			var selet = document.getElementById("stor").checked;
+			var storag = selet?localStorage:sessionStorage;
+				storag.clear();
+					}
+				
+		</script>
+		
+	</body>
+</html>
